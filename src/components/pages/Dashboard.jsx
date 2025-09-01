@@ -26,14 +26,14 @@ const Dashboard = () => {
   const error = employeesError || attendanceError || leaveError;
 
   useEffect(() => {
-    if (employees.length && attendance.length && leaveRequests.length) {
+if (employees.length && attendance.length && leaveRequests.length) {
       const today = format(new Date(), "yyyy-MM-dd");
-      const todayAttendance = attendance.filter(record => record.date === today);
+      const todayAttendance = attendance.filter(record => record.date_c === today);
       const presentCount = todayAttendance.filter(record => 
-        record.status === "present" || record.status === "late"
+        record.status_c === "present" || record.status_c === "late"
       ).length;
-      const onLeaveCount = todayAttendance.filter(record => record.status === "leave").length;
-      const pendingCount = leaveRequests.filter(req => req.status === "pending").length;
+      const onLeaveCount = todayAttendance.filter(record => record.status_c === "leave").length;
+      const pendingCount = leaveRequests.filter(req => req.status_c === "pending").length;
 
       setDashboardStats({
         totalEmployees: employees.length,

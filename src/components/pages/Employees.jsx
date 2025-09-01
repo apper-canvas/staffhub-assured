@@ -17,7 +17,7 @@ const Employees = () => {
   const [filteredEmployees, setFilteredEmployees] = useState([]);
 
   // Get unique departments for filter
-  const departments = [...new Set(employees.map(emp => emp.department))].map(dept => ({
+const departments = [...new Set(employees.map(emp => emp.department_c))].map(dept => ({
     value: dept,
     label: dept
   }));
@@ -31,12 +31,12 @@ const Employees = () => {
   useEffect(() => {
     let filtered = employees;
 
-    if (departmentFilter) {
-      filtered = filtered.filter(emp => emp.department === departmentFilter);
+if (departmentFilter) {
+      filtered = filtered.filter(emp => emp.department_c === departmentFilter);
     }
 
     if (statusFilter) {
-      filtered = filtered.filter(emp => emp.status === statusFilter);
+      filtered = filtered.filter(emp => emp.status_c === statusFilter);
     }
 
     setFilteredEmployees(filtered);
@@ -48,8 +48,8 @@ const Employees = () => {
     searchEmployees(query);
   };
 
-  const handleDeleteEmployee = async (employee) => {
-    if (window.confirm(`Are you sure you want to delete ${employee.firstName} ${employee.lastName}?`)) {
+const handleDeleteEmployee = async (employee) => {
+    if (window.confirm(`Are you sure you want to delete ${employee.first_name_c} ${employee.last_name_c}?`)) {
       try {
         await deleteEmployee(employee.Id);
         toast.success("Employee deleted successfully");
@@ -165,14 +165,14 @@ const Employees = () => {
             <div className="text-sm text-gray-600">Total Employees</div>
           </div>
           <div>
-            <div className="text-2xl font-bold text-success">
-              {employees.filter(emp => emp.status === "active").length}
+<div className="text-2xl font-bold text-success">
+              {employees.filter(emp => emp.status_c === "active").length}
             </div>
             <div className="text-sm text-gray-600">Active</div>
           </div>
           <div>
             <div className="text-2xl font-bold text-error">
-              {employees.filter(emp => emp.status === "inactive").length}
+              {employees.filter(emp => emp.status_c === "inactive").length}
             </div>
             <div className="text-sm text-gray-600">Inactive</div>
           </div>
